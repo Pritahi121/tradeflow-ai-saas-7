@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useSession } from '@/lib/auth-client'
+import { useAuth } from '@/contexts/AuthContext'
 import { Loader2 } from 'lucide-react'
 
 interface ProtectedRouteProps {
@@ -10,16 +10,16 @@ interface ProtectedRouteProps {
 }
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { data: session, isPending } = useSession()
+  const { user, loading } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
-    if (!isPending && !session?.user) {
+    if (!loading && !user) {
       router.push('/login')
     }
-  }, [session, isPending, router])
+  }, [user, loading, router])
 
-  if (isPending) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
@@ -30,7 +30,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
     )
   }
 
-  if (!session?.user) {
+  if (!user) {
     return null
   }
 

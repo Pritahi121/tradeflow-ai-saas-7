@@ -34,7 +34,7 @@ export interface PurchaseOrder {
   po_number: string
   vendor_name?: string
   total_amount: number
-  items?: Record<string, unknown> // jsonb
+  items?: any // jsonb
   status?: string
   created_at: string
   updated_at: string
