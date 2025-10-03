@@ -1,0 +1,64 @@
+
+> tradeflow-ai@0.1.0 dev
+> next dev --turbopack
+
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /home/z/my-project/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /home/z/my-project/tradeflow-ai-saas/package-lock.json
+
+ ⚠ Port 3000 is in use by process 192, using available port 3001 instead.
+   ▲ Next.js 15.5.2 (Turbopack)
+   - Local:        http://localhost:3001
+   - Network:      http://21.0.8.159:3001
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1230ms
+ ○ Compiling / ...
+ ✓ Compiled / in 4.2s
+ HEAD / 200 in 4839ms
+ ⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+
+[Error:   [31mx[0m Merge conflict marker encountered.
+   ,-[2:1]
+ [2m1[0m | import type { NextConfig } from "next";
+ [2m2[0m | <<<<<<< HEAD
+   : [35;1m^^^^^^^[0m
+ [2m3[0m | 
+ [2m4[0m | const nextConfig: NextConfig = {
+ [2m5[0m |   devIndicators: false,
+   `----
+  [31mx[0m Merge conflict marker encountered.
+    ,-[10:1]
+ [2m 7[0m | 
+ [2m 8[0m | export default nextConfig;
+ [2m 9[0m | 
+ [2m10[0m | =======
+    : [35;1m^^^^^^^[0m
+ [2m11[0m | import path from "node:path";
+ [2m12[0m | 
+ [2m13[0m | const LOADER = path.resolve(__dirname, 'src/visual-edits/component-tagger-loader.js');
+    `----
+  [31mx[0m Merge conflict marker encountered.
+    ,-[41:1]
+ [2m38[0m | 
+ [2m39[0m | export default nextConfig;
+ [2m40[0m | // Orchids restart: 1759496053348
+ [2m41[0m | >>>>>>> 968759f774e9858e076a392f449eae75714ca38c
+    : [35;1m^^^^^^^[0m
+    `----
+
+
+Caused by:
+    Syntax Error] {
+  code: 'GenericFailure'
+}
+
+Node.js v22.19.0
+[?25h

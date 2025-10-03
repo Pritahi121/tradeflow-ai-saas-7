@@ -5,7 +5,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { 
   Zap, 
-  FileText, 
   Clock, 
   Shield, 
   CheckCircle, 
@@ -13,7 +12,6 @@ import {
   Upload,
   Mail,
   FileSpreadsheet,
-  BarChart3,
   Users,
   Building,
   Star

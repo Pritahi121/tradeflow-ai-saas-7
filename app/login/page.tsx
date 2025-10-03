@@ -35,7 +35,7 @@ export default function LoginPage() {
       } else if (data.user) {
         router.push('/dashboard')
       }
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred')
     } finally {
       setLoading(false)
@@ -166,7 +166,7 @@ export default function LoginPage() {
 
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
-                Don't have an account?{' '}
+                Don&apos;t have an account?{' '}
                 <Link href="/signup" className="font-medium text-blue-600 hover:text-blue-500">
                   Sign up for free
                 </Link>
