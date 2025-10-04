@@ -1,5 +1,5 @@
-import { db } from '@/db';
-import { poHistory } from '@/db/schema';
+import { db } from '../index';
+import { poHistory } from '../schema';
 
 async function main() {
     const samplePoHistory = [

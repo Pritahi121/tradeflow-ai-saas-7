@@ -1,5 +1,5 @@
-import { db } from '@/db';
-import { userQuotas } from '@/db/schema';
+import { db } from '../index';
+import { userQuotas } from '../schema';
 
 async function main() {
     const sampleUserQuotas = [

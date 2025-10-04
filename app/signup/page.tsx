@@ -86,7 +86,7 @@ export default function SignupPage() {
               </div>
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome to TradeFlow AI!</h2>
               <p className="text-gray-600 mb-6">
-                Your account has been created successfully. You're being redirected to your dashboard...
+                Your account has been created successfully. You&apos;re being redirected to your dashboard...
               </p>
               <div className="space-y-2 text-sm text-gray-500">
                 <p>✅ 10 free processing credits added</p>

@@ -273,7 +273,7 @@ function IntegrationsContent() {
                 <div>
                   <h4 className="font-medium text-blue-900">More Integrations Coming Soon</h4>
                   <p className="text-sm text-blue-700 mt-1">
-                    We're working on additional integrations based on user feedback. 
+                    We&apos;re working on additional integrations based on user feedback. 
                     Contact us if you have specific integration requests.
                   </p>
                 </div>

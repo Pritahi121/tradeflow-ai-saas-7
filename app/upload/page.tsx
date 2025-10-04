@@ -202,7 +202,7 @@ export default function UploadPage() {
           <Alert className="mb-6">
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>
-              You're running low on credits ({credits} remaining). 
+              You&apos;re running low on credits ({credits} remaining). 
               <Link href="/billing" className="font-medium text-blue-600 hover:text-blue-500 ml-1">
                 Upgrade your plan
               </Link> to continue processing.
