@@ -48,12 +48,29 @@ export default function LoginPage() {
     setGoogleLoading(true)
 
     try {
-      await authClient.signIn.social({
+      // Set timeout to reset loading if redirect doesn't happen
+      const timeoutId = setTimeout(() => {
+        setGoogleLoading(false)
+        setError('Google sign-in is taking longer than expected. Please try again.')
+      }, 10000) // 10 seconds timeout
+
+      const result = await authClient.signIn.social({
         provider: 'google',
         callbackURL: '/dashboard'
       })
-    } catch (err) {
-      setError('Failed to sign in with Google. Please try again.')
+
+      clearTimeout(timeoutId)
+
+      // If there's an error in the result
+      if (result?.error) {
+        console.error('Google OAuth error:', result.error)
+        setError(result.error.message || 'Failed to sign in with Google')
+        setGoogleLoading(false)
+      }
+      // Note: If redirect happens, this code won't execute
+    } catch (err: any) {
+      console.error('Google sign-in error:', err)
+      setError(err?.message || 'Failed to connect to Google. Please check your internet connection and try again.')
       setGoogleLoading(false)
     }
   }
