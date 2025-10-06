@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { 
   Zap, 
+  FileText, 
   Clock, 
   Shield, 
   CheckCircle, 
@@ -12,13 +13,41 @@ import {
   Upload,
   Mail,
   FileSpreadsheet,
+  BarChart3,
   Users,
   Building,
   Star
 } from 'lucide-react'
 import Link from 'next/link'
+import { useSession } from '@/lib/auth-client'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function LandingPage() {
+  const { data: session, isPending } = useSession()
+  const router = useRouter()
+
+  // Redirect to dashboard if already logged in
+  useEffect(() => {
+    if (!isPending && session?.user) {
+      router.push('/dashboard')
+    }
+  }, [session, isPending, router])
+
+  // Show loading while checking session
+  if (isPending) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="h-12 w-12 bg-primary rounded-xl flex items-center justify-center mx-auto mb-4 animate-pulse">
+            <Zap className="h-6 w-6 text-primary-foreground" />
+          </div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    )
+  }
+
   const features = [
     {
       icon: Upload,
@@ -111,29 +140,29 @@ export default function LandingPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+    <div className="min-h-screen bg-background">
+      {/* Header - Clean, simple nav like Redmi: flat, minimal, yellow accents */}
+      <header className="fixed top-0 left-0 right-0 z-50 border-b bg-card">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <div className="h-8 w-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Zap className="h-5 w-5 text-white" />
+              <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
+                <Zap className="h-5 w-5 text-primary-foreground" />
               </div>
-              <span className="ml-2 text-xl font-bold text-gray-900">TradeFlow AI</span>
+              <span className="ml-3 text-xl font-bold text-foreground">TradeFlow AI</span>
             </div>
             
-            <nav className="hidden md:flex space-x-8">
-              <a href="#features" className="text-gray-600 hover:text-gray-900">Features</a>
-              <a href="#pricing" className="text-gray-600 hover:text-gray-900">Pricing</a>
-              <a href="#about" className="text-gray-600 hover:text-gray-900">About</a>
+            <nav className="hidden md:flex space-x-6">
+              <a href="#features" className="text-muted-foreground font-medium">Features</a>
+              <a href="#pricing" className="text-muted-foreground font-medium">Pricing</a>
+              <a href="#about" className="text-muted-foreground font-medium">About</a>
             </nav>
 
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" asChild>
+            <div className="flex items-center space-x-2">
+              <Button variant="ghost" asChild className="font-medium text-muted-foreground px-4 py-2">
                 <Link href="/login">Sign In</Link>
               </Button>
-              <Button asChild>
+              <Button asChild className="bg-accent text-accent-foreground px-4 py-2 rounded-lg">
                 <Link href="/signup">Get Started</Link>
               </Button>
             </div>
@@ -141,29 +170,29 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      {/* Hero Section - Redmi-like: clean hero with card-style content, no effects, yellow bg */}
+      <section className="pt-20 pb-20 bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto">
-            <Badge className="mb-4 bg-blue-100 text-blue-800 hover:bg-blue-100">
+          <div className="bg-card rounded-2xl p-8 mx-auto max-w-4xl text-center border">
+            <Badge className="mb-4 inline-flex px-3 py-1 bg-primary/20 text-primary rounded-full">
               🚀 AI-Powered Purchase Order Processing
             </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-4 leading-tight">
               Process Purchase Orders in
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Seconds</span>
+              <span className="block text-accent">Seconds</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
               Upload your PO files and get structured, validated data instantly. 
               Save hours of manual work with our AI-powered extraction technology.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild className="text-lg px-8 py-3">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button size="lg" asChild className="px-6 py-3 font-semibold bg-accent text-accent-foreground rounded-lg">
                 <Link href="/signup">
                   Start Free Trial
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" asChild className="text-lg px-8 py-3">
+              <Button size="lg" variant="outline" asChild className="px-6 py-3 font-semibold border-primary text-primary rounded-lg">
                 <Link href="/login">
                   View Demo
                 </Link>
@@ -173,236 +202,217 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-white">
+      {/* Stats Section - Grid of simple cards, no hovers */}
+      <section className="py-16 bg-card -mt-8">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+              <div key={index} className="p-4 bg-secondary rounded-lg border text-center">
+                <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
                   {stat.number}
                 </div>
-                <div className="text-gray-600">{stat.label}</div>
+                <div className="text-muted-foreground font-medium text-sm">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-20 bg-gray-50">
+      {/* Features Section - Yellow cards like image, flat */}
+      <section id="features" className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Everything you need to process POs efficiently
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Our AI-powered platform handles the entire PO processing workflow, 
               from upload to structured data export.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, index) => (
-              <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-                <CardHeader>
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mb-4">
-                    <feature.icon className="h-6 w-6 text-white" />
+              <div key={index}>
+                <Card className="border border-primary/30 bg-secondary rounded-xl p-6 shadow-md">
+                  <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center mb-4">
+                    <feature.icon className="h-6 w-6 text-primary-foreground" />
                   </div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-gray-600">
+                  <CardTitle className="text-xl font-semibold text-foreground mb-2">{feature.title}</CardTitle>
+                  <CardDescription className="text-muted-foreground leading-relaxed">
                     {feature.description}
                   </CardDescription>
-                </CardContent>
-              </Card>
+                </Card>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* How it Works */}
-      <section className="py-20 bg-white">
+      {/* How it Works - Simple steps cards, no lines/animations */}
+      <section className="py-16 bg-card">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               How TradeFlow AI Works
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-lg text-muted-foreground">
               Simple 3-step process to transform your PO workflow
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Upload className="h-8 w-8 text-blue-600" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { icon: Upload, title: '1. Upload Files', desc: 'Drag and drop your PO files (PDF, EML, TXT) or upload from your device', bg: 'bg-accent/20' },
+              { icon: Zap, title: '2. AI Processing', desc: 'Our AI extracts vendor details, line items, amounts, and validates the data', bg: 'bg-primary/20' },
+              { icon: FileSpreadsheet, title: '3. Export Data', desc: 'Get structured data exported to Google Sheets or download as CSV/Excel', bg: 'bg-accent/20' }
+            ].map((step, index) => (
+              <div key={index} className="text-center p-6 bg-secondary rounded-xl border shadow-md">
+                <div className={`w-16 h-16 ${step.bg} rounded-xl flex items-center justify-center mx-auto mb-4 border`}>
+                  <step.icon className="h-8 w-8 text-accent" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 text-foreground">{step.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{step.desc}</p>
               </div>
-              <h3 className="text-xl font-semibold mb-4">1. Upload Files</h3>
-              <p className="text-gray-600">
-                Drag and drop your PO files (PDF, EML, TXT) or upload from your device
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Zap className="h-8 w-8 text-purple-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-4">2. AI Processing</h3>
-              <p className="text-gray-600">
-                Our AI extracts vendor details, line items, amounts, and validates the data
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <FileSpreadsheet className="h-8 w-8 text-green-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-4">3. Export Data</h3>
-              <p className="text-gray-600">
-                Get structured data exported to Google Sheets or download as CSV/Excel
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-gray-50">
+      {/* Pricing Section - Flat yellow cards, popular badge simple */}
+      <section id="pricing" className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Simple, Transparent Pricing
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-lg text-muted-foreground">
               Choose the plan that fits your business needs. No hidden fees.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {plans.map((plan, index) => (
-              <Card key={index} className={`relative ${plan.popular ? 'border-blue-500 shadow-xl scale-105' : 'border-gray-200'}`}>
-                {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-blue-600 text-white px-4 py-1">
+              <div key={index}>
+                <Card className={`border rounded-xl p-6 shadow-lg ${plan.popular ? 'border-primary bg-primary/10' : 'border-border bg-secondary'}`}>
+                  {plan.popular && (
+                    <Badge className="mb-4 inline-flex bg-primary text-primary-foreground px-4 py-1 rounded-full font-medium">
                       Most Popular
                     </Badge>
+                  )}
+                  
+                  <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <plan.icon className="h-6 w-6 text-primary-foreground" />
                   </div>
-                )}
-                
-                <CardHeader className="text-center pb-8">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <plan.icon className="h-6 w-6 text-white" />
-                  </div>
-                  <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                  <CardDescription className="text-gray-600 mb-4">
+                  <CardTitle className="text-2xl font-bold text-foreground text-center mb-2">{plan.name}</CardTitle>
+                  <CardDescription className="text-muted-foreground text-center mb-3 text-base">
                     {plan.description}
                   </CardDescription>
-                  <div className="flex items-baseline justify-center">
-                    <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
-                    <span className="text-gray-600 ml-1">{plan.period}</span>
+                  <div className="text-center mb-4">
+                    <div className="flex items-baseline justify-center">
+                      <span className="text-4xl font-bold text-foreground">{plan.price}</span>
+                      <span className="text-muted-foreground ml-1 text-lg">{plan.period}</span>
+                    </div>
+                    <p className="text-sm text-muted-foreground font-medium">{plan.credits} credits included</p>
                   </div>
-                  <p className="text-sm text-gray-600 mt-2">{plan.credits} credits included</p>
-                </CardHeader>
-                
-                <CardContent>
-                  <ul className="space-y-3 mb-8">
+                  
+                  <ul className="space-y-3 mb-6">
                     {plan.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-green-600 mr-3 flex-shrink-0" />
-                        <span className="text-gray-700">{feature}</span>
+                        <CheckCircle className="h-4 w-4 text-accent mr-2 flex-shrink-0" />
+                        <span className="text-foreground font-medium text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>
                   
                   <Button 
-                    className="w-full" 
-                    variant={plan.popular ? "default" : "outline"}
+                    className="w-full py-3 font-semibold rounded-lg bg-accent text-accent-foreground"
                     asChild
                   >
                     <Link href="/signup">
                       Get Started
                     </Link>
                   </Button>
-                </CardContent>
-              </Card>
+                </Card>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
+      {/* CTA Section - Simple card CTA, no relative */}
+      <section className="py-16 bg-primary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to Transform Your PO Processing?
-          </h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Join hundreds of businesses already saving time and reducing errors with TradeFlow AI.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" asChild className="text-lg px-8 py-3">
-              <Link href="/signup">
-                Start Free Trial
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild className="text-lg px-8 py-3 border-white text-white hover:bg-white hover:text-blue-600">
-              <Link href="/login">
-                View Demo
-              </Link>
-            </Button>
+          <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-8 max-w-3xl mx-auto shadow-lg">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
+              Ready to Transform Your PO Processing?
+            </h2>
+            <p className="text-lg text-primary-foreground/80 mb-6 max-w-2xl mx-auto leading-relaxed">
+              Join hundreds of businesses already saving time and reducing errors with TradeFlow AI.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button size="lg" asChild className="px-6 py-3 font-semibold bg-accent text-accent-foreground rounded-lg">
+                <Link href="/signup">
+                  Start Free Trial
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" asChild className="px-6 py-3 font-semibold border-primary-foreground text-primary-foreground rounded-lg">
+                <Link href="/login">
+                  View Demo
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      {/* Footer - Simple grid, yellow accents */}
+      <footer className="bg-card text-foreground py-12 border-t border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div className="md:col-span-1">
               <div className="flex items-center mb-4">
-                <div className="h-8 w-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                  <Zap className="h-5 w-5 text-white" />
+                <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
+                  <Zap className="h-4 w-4 text-primary-foreground" />
                 </div>
                 <span className="ml-2 text-xl font-bold">TradeFlow AI</span>
               </div>
-              <p className="text-gray-400">
+              <p className="text-muted-foreground leading-relaxed text-sm">
                 AI-powered purchase order processing for modern businesses.
               </p>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Product</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#features" className="hover:text-white">Features</a></li>
-                <li><a href="#pricing" className="hover:text-white">Pricing</a></li>
-                <li><a href="/login" className="hover:text-white">Demo</a></li>
+              <h4 className="font-bold text-base mb-4 text-foreground">Product</h4>
+              <ul className="space-y-2 text-muted-foreground text-sm">
+                <li><a href="#features" className="text-foreground">Features</a></li>
+                <li><a href="#pricing" className="text-foreground">Pricing</a></li>
+                <li><a href="/login" className="text-foreground">Demo</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Support</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white">Help Center</a></li>
-                <li><a href="#" className="hover:text-white">Contact Us</a></li>
-                <li><a href="#" className="hover:text-white">Status</a></li>
+              <h4 className="font-bold text-base mb-4 text-foreground">Support</h4>
+              <ul className="space-y-2 text-muted-foreground text-sm">
+                <li><a href="#" className="text-foreground">Help Center</a></li>
+                <li><a href="#" className="text-foreground">Contact Us</a></li>
+                <li><a href="#" className="text-foreground">Status</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#about" className="hover:text-white">About</a></li>
-                <li><a href="#" className="hover:text-white">Privacy</a></li>
-                <li><a href="#" className="hover:text-white">Terms</a></li>
+              <h4 className="font-bold text-base mb-4 text-foreground">Company</h4>
+              <ul className="space-y-2 text-muted-foreground text-sm">
+                <li><a href="#about" className="text-foreground">About</a></li>
+                <li><a href="#" className="text-foreground">Privacy</a></li>
+                <li><a href="#" className="text-foreground">Terms</a></li>
               </ul>
             </div>
           </div>
           
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 TradeFlow AI. All rights reserved.</p>
+          <div className="border-t border-border/50 pt-6 text-center text-muted-foreground text-sm">
+            <p>&copy; 2024 TradeFlow AI. All rights reserved.</p>
           </div>
         </div>
       </footer>
