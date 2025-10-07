@@ -1,5 +1,5 @@
-import { db } from '../index';
-import { clients } from '../schema';
+import { db } from '@/db';
+import { clients } from '@/db/schema';
 
 async function main() {
     const sampleClients = [

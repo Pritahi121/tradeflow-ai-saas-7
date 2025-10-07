@@ -1,5 +1,5 @@
-import { db } from '../index';
-import { googleIntegrations } from '../schema';
+import { db } from '@/db';
+import { googleIntegrations } from '@/db/schema';
 
 async function main() {
     const sampleGoogleIntegrations = [

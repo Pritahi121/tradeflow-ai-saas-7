@@ -2,13 +2,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = componentTagger;
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 const parser_1 = require("@babel/parser");
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 const magic_string_1 = require("magic-string");
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 const estree_walker_1 = require("estree-walker");
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 const path = require("path");
 /* ───────────────────────────────────────────── Blacklists */
 const threeFiberElems = [
@@ -431,7 +427,6 @@ function componentTagger(src, map) {
                     orchidsId += `@${mapContext.arrayName}`;
                 }
                 // 🔍 Append referenced variable locations for simple identifier references in props
-                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                 (_a = node.attributes) === null || _a === void 0 ? void 0 : _a.forEach((attr) => {
                     var _a, _b;
                     if (attr.type === 'JSXAttribute' &&

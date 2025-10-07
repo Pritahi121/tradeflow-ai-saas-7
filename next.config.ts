@@ -5,9 +5,6 @@ const LOADER = path.resolve(__dirname, 'src/visual-edits/component-tagger-loader
 
 const nextConfig: NextConfig = {
   devIndicators: false,
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   images: {
     remotePatterns: [
       {
@@ -31,4 +28,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-// Orchids restart: 1759496053348
+// Orchids restart: 1759691181700

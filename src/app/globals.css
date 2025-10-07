@@ -1,0 +1,166 @@
+/* Updated: 2025-10-06T11:35:26.692Z */
+/* Updated: 2025-10-06T04:58:56.180Z */
+/* Updated: 2025-10-05T18:51:16.271Z */
+/* Updated: 2025-10-05T17:26:11.684Z */
+/* Updated: 2025-10-05T17:12:35.888Z */
+/* Updated: 2025-10-05T16:34:56.547Z */
+/* Updated: 2025-10-05T16:32:04.757Z */
+/* Updated: 2025-10-05T15:53:33.053Z */
+/* Updated: 2025-10-05T15:51:52.107Z */
+/* Updated: 2025-10-05T14:23:31.181Z */
+/* Updated: 2025-10-05T13:46:28.529Z */
+/* Updated: 2025-10-05T10:33:58.024Z */
+/* Updated: 2025-10-05T10:30:26.720Z */
+/* Updated: 2025-10-05T10:02:29.139Z */
+/* Updated: 2025-10-04T09:12:10.291Z */
+/* Updated: 2025-10-04T08:41:06.848Z */
+/* Updated: 2025-10-04T08:13:33.727Z */
+/* Updated: 2025-10-04T07:26:09.179Z */
+/* Updated: 2025-10-03T15:08:13.714Z */
+/* Updated: 2025-10-03T14:12:22.549Z */
+/* Updated: 2025-10-03T13:28:35.364Z */
+/* Updated: 2025-10-03T13:16:03.712Z */
+/* Updated: 2025-10-03T13:15:27.144Z */
+/* Updated: 2025-10-03T13:08:13.372Z */
+/* Updated: 2025-10-03T10:59:31.127Z */
+/* Updated: 2025-10-03T10:58:44.855Z */
+/* Updated: 2025-10-03T10:43:50.155Z */
+/* Updated: 2025-10-03T10:13:55.404Z */
+/* Updated: 2025-10-03T10:07:41.331Z */
+/* Updated: 2025-10-03T09:13:35.832Z */
+/* Updated: 2025-10-03T08:43:46.951Z */
+/* Updated: 2025-10-03T08:25:13.474Z */
+/* Updated: 2025-10-03T08:02:49.148Z */
+/* Updated: 2025-10-03T07:49:56.410Z */
+/* Updated: 2025-10-03T07:30:20.854Z */
+/* Updated: 2025-10-03T06:22:10.880Z */
+/* Updated: 2025-10-03T06:02:44.834Z */
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(40% 0.2 90); /* Dark yellow background */
+  --foreground: oklch(95% 0.1 90); /* Light yellow/orange for text */
+  --card: oklch(50% 0.15 85); /* Slightly lighter dark yellow for cards */
+  --card-foreground: oklch(95% 0.1 90);
+  --popover: oklch(50% 0.15 85);
+  --popover-foreground: oklch(95% 0.1 90);
+  --primary: oklch(70% 0.18 85); /* Vibrant yellow for primary */
+  --primary-foreground: oklch(20% 0.05 90); /* Dark for contrast */
+  --secondary: oklch(45% 0.18 92); /* Deeper yellow secondary */
+  --secondary-foreground: oklch(95% 0.1 90);
+  --muted: oklch(48% 0.12 88); /* Muted yellow */
+  --muted-foreground: oklch(80% 0.08 90);
+  --accent: oklch(65% 0.2 95); /* Bright yellow accent */
+  --accent-foreground: oklch(20% 0.05 90);
+  --destructive: oklch(60% 0.15 20); /* Reddish for errors */
+  --border: oklch(45% 0.1 90); /* Dark yellow border */
+  --input: oklch(45% 0.1 90);
+  --ring: oklch(60% 0.15 85); /* Yellow ring */
+  --chart-1: oklch(70% 0.15 90);
+  --chart-2: oklch(75% 0.10 345);
+  --chart-3: oklch(80% 0.05 80);
+  --chart-4: oklch(60% 0.12 90);
+  --chart-5: oklch(65% 0.08 345);
+  --sidebar: oklch(40% 0.2 90);
+  --sidebar-foreground: oklch(95% 0.1 90);
+  --sidebar-primary: oklch(70% 0.18 85);
+  --sidebar-primary-foreground: oklch(20% 0.05 90);
+  --sidebar-accent: oklch(65% 0.2 95);
+  --sidebar-accent-foreground: oklch(20% 0.05 90);
+  --sidebar-border: oklch(45% 0.1 90);
+  --sidebar-ring: oklch(60% 0.15 85);
+}
+
+.dark {
+  --background: oklch(30% 0.25 90); /* Darker yellow for dark mode */
+  --foreground: oklch(98% 0.02 80);
+  --card: oklch(35% 0.2 85);
+  --card-foreground: oklch(98% 0.02 80);
+  --popover: oklch(35% 0.2 85);
+  --popover-foreground: oklch(98% 0.02 80);
+  --primary: oklch(65% 0.2 85);
+  --primary-foreground: oklch(20% 0.05 90);
+  --secondary: oklch(35% 0.18 92);
+  --secondary-foreground: oklch(98% 0.02 80);
+  --muted: oklch(35% 0.15 88);
+  --muted-foreground: oklch(70% 0.05 90);
+  --accent: oklch(60% 0.25 95);
+  --accent-foreground: oklch(20% 0.05 90);
+  --destructive: oklch(70% 0.15 15);
+  --border: oklch(35% 0.08 90);
+  --input: oklch(35% 0.08 90);
+  --ring: oklch(50% 0.15 85);
+  --chart-1: oklch(50% 0.15 90);
+  --chart-2: oklch(55% 0.10 345);
+  --chart-3: oklch(60% 0.05 80);
+  --chart-4: oklch(40% 0.12 90);
+  --chart-5: oklch(45% 0.08 345);
+  --sidebar: oklch(35% 0.2 85);
+  --sidebar-foreground: oklch(98% 0.02 80);
+  --sidebar-primary: oklch(65% 0.2 85);
+  --sidebar-primary-foreground: oklch(20% 0.05 90);
+  --sidebar-accent: oklch(60% 0.25 95);
+  --sidebar-accent-foreground: oklch(20% 0.05 90);
+  --sidebar-border: oklch(35% 0.08 90);
+  --sidebar-ring: oklch(50% 0.15 85);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/*
+ Hides Next.js error messages in the browser. Do not remove
+ this. If you need to see errors, check the console.
+*/
+nextjs-portal {
+  display: none;
+}

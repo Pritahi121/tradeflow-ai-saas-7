@@ -46,4 +46,4 @@ Thumbs.db
 # Supabase
 .supabase/
 .vercel
-.env
+# .env # Removed by Orchids to allow .env files
